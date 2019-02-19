@@ -16,26 +16,27 @@
     "NestedTemplateFolder": "nestedtemplates",
     "NetworkSecurityGroupsTemplateFileName": "NetworkSecurityGroups.json",
     "RoutingTablesTemplateFileName": "RoutingTables.json",
-    "NSGname_X": "defaultnsg",
-    "SubnetName_X": "TestSubnet",
-    "SubnetAddressPrefix_X": "10.3.0.0/24",
-    "SubnetName_Y": "TestSubnetY",
-    "SubnetAddressPrefix_Y": "10.3.2.0/24",
-    "RouteTableResourceName_X": "DefaultRouteTable"
+    "NSGname_1": "dmzin-nsg",
+    "SubnetName_1": "dmzin-sub",
+    "SubnetAddressPrefix_1": "10.3.0.0/24",
+    "NSGname_2": "dmzout-nsg",
+    "SubnetName_2": "dmzout-sub",
+    "SubnetAddressPrefix_2": "10.3.1.0/25",
+    "RouteTableResourceName": "DefaultRouteTable"
   },
   "resources": [
     {
       "apiVersion": "2018-04-01",
       "type": "Microsoft.Network/virtualNetworks/subnets",
-      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_X'))]",
+      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_1'))]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "addressPrefix": "[variables('SubnetAddressPrefix_X')]",
+        "addressPrefix": "[variables('SubnetAddressPrefix_1')]",
         "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_X'))]"
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_1'))]"
         },
         "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName_X'))]"
+          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName'))]"
         }
       },
 
@@ -48,10 +49,16 @@
     {
       "apiVersion": "2018-04-01",
       "type": "Microsoft.Network/virtualNetworks/subnets",
-      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_Y'))]",
+      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_2'))]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "addressPrefix": "[variables('SubnetAddressPrefix_Y')]"
+        "addressPrefix": "[variables('SubnetAddressPrefix_2')]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_2'))]"
+        },
+        "routeTable": {
+          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName'))]"
+        }
       },
 
       "dependsOn": [
@@ -71,7 +78,8 @@
         },
         "parameters": {
           "NSGname": {
-            "value": "[variables('NSGname_X')]"
+            "value": "[variables('NSGname_1')]",
+            "value": "[variables('NSGname_2')]"
           }
         }
       }
@@ -89,7 +97,7 @@
         },
         "parameters": {
           "RouteTableResourceName": {
-            "value": "[variables('RouteTableResourceName_X')]"
+            "value": "[variables('RouteTableResourceName')]"
           }
         }
       }
