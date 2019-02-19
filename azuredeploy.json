@@ -3,12 +3,18 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "_artifactsLocation": {
-      "defaultValue": "https://raw.githubusercontent.com/nabbdl/vnet-nested-arm-template/master",
-      "type": "string"
+      "type": "string",
+      "metadata": {
+          "description": "The name of the subscription that contains the keyvault."
+      },
+      "defaultValue": "https://raw.githubusercontent.com/nabbdl/vnet-nested-arm-template/master"
     },
     "_artifactsLocationSasToken": {
-      "defaultValue": "empty",
-      "type": "string"
+       "type": "securestring",
+       "metadata": {
+          "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+        },
+       "defaultValue": ""
     },
     "rebuildVNET": {"type": "string","defaultValue": "no"}
   },
