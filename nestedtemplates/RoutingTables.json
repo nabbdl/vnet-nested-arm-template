@@ -22,11 +22,11 @@
       "properties": {
         "routes": [
           {
-            "name": "DefaultRouteToCheckpointInternalNIC",
+            "name": "DefaultRouteToFortigateInternalNICLoadbalancer",
             "properties": {
               "addressPrefix": "0.0.0.0/0",
               "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "10.18.113.28"
+              "nextHopIpAddress": "10.3.1.10"
             }
           }
         ]
