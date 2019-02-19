@@ -12,7 +12,55 @@
     {
       "comments": "NSG to Gateway subnet",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('NSGName')]",
+      "name": "[parameters('NSGName_1')]",
+      "apiVersion": "2017-06-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "securityRules": [
+          {
+            "name": "default-allow-rdp",
+            "etag": "W/\"710cfb19-5087-449a-923a-7c781d7d0999\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1000,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "DenyInbound",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 4000,
+              "direction": "Inbound",
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      },
+      "dependsOn": []
+    }
+    {
+      "comments": "NSG to Gateway subnet",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[parameters('NSGName_2')]",
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
       "scale": null,
