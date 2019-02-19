@@ -21,7 +21,7 @@
     "SubnetAddressPrefix_1": "10.3.0.0/24",
     "NSGname_2": "dmzout-nsg",
     "SubnetName_2": "dmzout-sub",
-    "SubnetAddressPrefix_2": "10.3.2.0/25",
+    "SubnetAddressPrefix_2": "10.3.3.0/25",
     "RouteTableResourceName": "DefaultRouteTable"
   },
   "resources": [
