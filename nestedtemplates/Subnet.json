@@ -18,9 +18,9 @@
     "RoutingTablesTemplateFileName": "RoutingTables.json",
     "NSGname_X": "defaultnsg",
     "SubnetName_X": "TestSubnet",
-    "SubnetAddressPrefix_X": "10.0.0.0/24",
+    "SubnetAddressPrefix_X": "10.3.0.0/24",
     "SubnetName_Y": "TestSubnetY",
-    "SubnetAddressPrefix_Y": "10.0.2.0/24",
+    "SubnetAddressPrefix_Y": "10.3.2.0/24",
     "RouteTableResourceName_X": "DefaultRouteTable"
   },
   "resources": [
