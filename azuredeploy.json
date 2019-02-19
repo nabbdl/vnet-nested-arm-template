@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "_artifactsLocation": {
-      "type": "string"
+      "type": "https://raw.githubusercontent.com/nabbdl/vnet-nested-arm-template/"
     },
     "_artifactsLocationSasToken": {
-      "type": "securestring"
+      "type": ""
     },
     "rebuildVNET": {"type": "string","defaultValue": "no"}
   },
