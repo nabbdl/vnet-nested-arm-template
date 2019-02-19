@@ -35,6 +35,7 @@
         },
         "parameters": {
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" },
           "VNETName": {
             "value": "[variables('VNETName')]"
 
