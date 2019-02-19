@@ -30,7 +30,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('SubnetTemplateFolder'), '/', variables('SubnetTemplateFileName'))]",
+          "uri": "[uri(concat(parameters('_artifactsLocation'), '/', variables('SubnetTemplateFolder'), '/', variables('SubnetTemplateFileName'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
