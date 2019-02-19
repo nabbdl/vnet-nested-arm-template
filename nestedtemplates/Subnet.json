@@ -24,7 +24,7 @@
     "SubnetAddressPrefix_2": "10.3.1.0/25",
     "NSGname_3": "appgw-nsg",
     "SubnetName_3": "appgw-sub",
-    "SubnetAddressPrefix_2": "10.3.1.128/25",
+    "SubnetAddressPrefix_3": "10.3.1.128/25",
     "RouteTableResourceName": "DefaultRouteTable"
   },
   "resources": [
