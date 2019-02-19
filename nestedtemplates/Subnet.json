@@ -37,9 +37,6 @@
         "addressPrefix": "[variables('SubnetAddressPrefix_1')]",
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_1'))]"
-        },
-        "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName'))]"
         }
       },
 
@@ -59,9 +56,6 @@
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_2'))]"
         },
-        "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName'))]"
-        }
       },
 
       "dependsOn": [
