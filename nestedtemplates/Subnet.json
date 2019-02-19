@@ -86,6 +86,8 @@
       },
 
       "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/','NestedNetworkSecurityGroupTemplate')]",
+        "[concat('Microsoft.Resources/deployments/','NestedrouteTablesTemplate')]"
       ]
 
     },
