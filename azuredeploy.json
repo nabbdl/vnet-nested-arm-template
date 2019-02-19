@@ -16,7 +16,7 @@
         },
        "defaultValue": ""
     },
-    "rebuildVNET": {"type": "string","defaultValue": "no"}
+    "rebuildVNET": {"type": "string","defaultValue": "yes"}
   },
   "variables": {
     "SubnetTemplateFolder": "nestedtemplates",
