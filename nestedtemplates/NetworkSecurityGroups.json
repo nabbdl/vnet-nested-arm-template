@@ -56,7 +56,7 @@
         ]
       },
       "dependsOn": []
-    }
+    },
     {
       "comments": "NSG to Gateway subnet",
       "type": "Microsoft.Network/networkSecurityGroups",
