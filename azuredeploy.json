@@ -32,6 +32,7 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "VNETName": {
             "value": "[variables('VNETName')]"
