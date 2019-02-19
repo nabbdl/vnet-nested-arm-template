@@ -22,7 +22,7 @@
     "NSGname_2": "dmzout-nsg",
     "SubnetName_2": "dmzout-sub",
     "SubnetAddressPrefix_2": "10.3.1.0/25",
-    "NSGname_3": "dmzout-nsg",
+    "NSGname_3": "appgw-nsg",
     "SubnetName_3": "appgw-sub",
     "SubnetAddressPrefix_2": "10.3.1.128/25",
     "RouteTableResourceName": "DefaultRouteTable"
