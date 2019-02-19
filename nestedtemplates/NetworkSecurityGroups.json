@@ -15,7 +15,7 @@
     {
       "comments": "NSG to Gateway subnet",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('NSGName_1')]",
+      "name": "[parameters('NSGname_1')]",
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
       "scale": null,
@@ -63,7 +63,7 @@
     {
       "comments": "NSG to Gateway subnet",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('NSGName_2')]",
+      "name": "[parameters('NSGname_2')]",
       "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
       "scale": null,
