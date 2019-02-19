@@ -77,8 +77,10 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "NSGname": {
-            "value": "[variables('NSGname_1')]",
+          "NSGname_1": {
+            "value": "[variables('NSGname_1')]"
+          },
+          "NSGname_2": {
             "value": "[variables('NSGname_2')]"
           }
         }
