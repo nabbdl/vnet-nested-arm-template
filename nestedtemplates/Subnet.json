@@ -21,7 +21,10 @@
     "SubnetAddressPrefix_1": "10.3.0.0/24",
     "NSGname_2": "dmzout-nsg",
     "SubnetName_2": "dmzout-sub",
-    "SubnetAddressPrefix_2": "10.3.3.0/25",
+    "SubnetAddressPrefix_2": "10.3.1.0/25",
+    "NSGname_3": "dmzout-nsg",
+    "SubnetName_3": "appgw-sub",
+    "SubnetAddressPrefix_2": "10.3.1.128/25",
     "RouteTableResourceName": "DefaultRouteTable"
   },
   "resources": [
@@ -62,6 +65,27 @@
       },
 
       "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/','NestedNetworkSecurityGroupTemplate')]",
+        "[concat('Microsoft.Resources/deployments/','NestedrouteTablesTemplate')]"
+      ]
+
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_3'))]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressPrefix": "[variables('SubnetAddressPrefix_3')]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_3'))]"
+        },
+        "routeTable": {
+          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName'))]"
+        }
+      },
+
+      "dependsOn": [
       ]
 
     },
@@ -82,6 +106,9 @@
           },
           "NSGname_2": {
             "value": "[variables('NSGname_2')]"
+          },
+          "NSGname_3": {
+            "value": "[variables('NSGname_3')]"
           }
         }
       }
