@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    },
+    "rebuildVNET": {"type": "string","defaultValue": "no"}
+  },
+  "variables": {
+    "SubnetTemplateFolder": "nestedtemplates",
+    "SubnetTemplateFileName": "Subnet.json",
+    "VirtualNetworkTemplateFileName": "virtualnetwork.json",
+    "VirtualNetworkPrefix": "10.3.0.0/16",
+    "VNETName": "main-we-vnet"
+  },
+  "resources": [
+    {
+      "name": "Subnet",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+        "[variables('VNETName')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('SubnetTemplateFolder'), '/', variables('SubnetTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" },
+          "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
+          "VNETName": {
+            "value": "[variables('VNETName')]"
+
+          }
+        }
+      }
+    },
+    {
+      "name": "[variables('VNETName')]",
+      "condition": "[equals(parameters('rebuildVNET'),'Yes')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-01-01",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "[variables('VNETName')]"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('VirtualNetworkPrefix')]"
+          ]
+        },
+        "subnets": [
+        ]
+      }
+    }
+  ],
+  "outputs": {}
+}

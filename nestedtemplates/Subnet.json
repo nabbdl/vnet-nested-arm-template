@@ -1,0 +1,100 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    },
+    "VNETName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "NestedTemplateFolder": "nestedtemplates",
+    "NetworkSecurityGroupsTemplateFileName": "NetworkSecurityGroups.json",
+    "RoutingTablesTemplateFileName": "RoutingTables.json",
+    "NSGname_X": "defaultnsg",
+    "SubnetName_X": "TestSubnet",
+    "SubnetAddressPrefix_X": "10.0.0.0/24",
+    "SubnetName_Y": "TestSubnetY",
+    "SubnetAddressPrefix_Y": "10.0.2.0/24",
+    "RouteTableResourceName_X": "DefaultRouteTable"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_X'))]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressPrefix": "[variables('SubnetAddressPrefix_X')]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSGname_X'))]"
+        },
+        "routeTable": {
+          "id": "[resourceId('Microsoft.Network/routeTables', variables('RouteTableResourceName_X'))]"
+        }
+      },
+
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/','NestedNetworkSecurityGroupTemplate')]",
+        "[concat('Microsoft.Resources/deployments/','NestedrouteTablesTemplate')]"
+      ]
+
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('VNETName'), '/', variables('SubnetName_Y'))]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressPrefix": "[variables('SubnetAddressPrefix_Y')]"
+      },
+
+      "dependsOn": [
+      ]
+
+    },
+    {
+      "name": "NestedNetworkSecurityGroupTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('NestedTemplateFolder'), '/', variables('NetworkSecurityGroupsTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "NSGname": {
+            "value": "[variables('NSGname_X')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "NestedrouteTablesTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('NestedTemplateFolder'), '/', variables('RoutingTablesTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "RouteTableResourceName": {
+            "value": "[variables('RouteTableResourceName_X')]"
+          }
+        }
+      }
+    }
+
+  ],
+  "outputs": {}
+}
