@@ -5,9 +5,6 @@
     "_artifactsLocation": {
       "type": "https://raw.githubusercontent.com/nabbdl/vnet-nested-arm-template/"
     },
-    "_artifactsLocationSasToken": {
-      "type": ""
-    },
     "rebuildVNET": {"type": "string","defaultValue": "no"}
   },
   "variables": {
@@ -28,11 +25,10 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('SubnetTemplateFolder'), '/', variables('SubnetTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('SubnetTemplateFolder'), '/', variables('SubnetTemplateFileName'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "_artifactsLocationSasToken": { "value": "[parameters('_artifactsLocationSasToken')]" },
           "_artifactsLocation": { "value": "[parameters('_artifactsLocation')]" },
           "VNETName": {
             "value": "[variables('VNETName')]"
